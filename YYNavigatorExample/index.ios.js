@@ -11,23 +11,33 @@ import React, {
   View
 } from 'react-native';
 
+import YYNavigator from 'react-native-yynavigator';
+let {
+    NavigationController
+} = YYNavigator;
+
 class YYNavigatorExample extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+          <NavigationController
+              initialRoute={{title: '首页', component:HomePage}}
+              />
       </View>
     );
   }
+}
+
+class HomePage extends Component {
+    render() {
+        return (
+            <View>
+                <Text>
+                    Home Page.
+                </Text>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

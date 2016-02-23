@@ -6,6 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react-native": "^0.20.0"
+    "react-native": "^0.20.0",
+    "react-native-yynavigator": "0.0.1"
   }
 }
