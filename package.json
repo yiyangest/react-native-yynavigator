@@ -1,0 +1,15 @@
+{
+  "name": "react-native-yynavigator",
+  "version": "0.0.1",
+  "description": "custom navigation bar for react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "navigator",
+    "react-native"
+  ],
+  "author": "yiyangest",
+  "license": "MIT"
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'YYNavigatorExample'
+
+include ':app'
