@@ -57,7 +57,6 @@ class NavigationBar extends React.Component {
       let navbarContent = (
           <BarContent route={this.props.currentRoute}
                       rightBarItem={this.props.rightBarItem}
-                      rightBarItem={this.props.rightBarItem}
                       titleBarItem={this.props.titleBarItem}
                       titleStyle={this.props.titleStyle}
                       leftProps={this.props.leftProps}
