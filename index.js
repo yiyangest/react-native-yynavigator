@@ -1,6 +1,6 @@
 import NavigationController from './Navigation/NavigationController';
 import NavigationButton from './Navigation/NavigationButton';
-import NavigatorMixin from './Navigator/NavigatorMixin';
+import NavigatorMixin from './Navigation/NavigatorMixin';
 var YYNavigator = {
     NavigationController: NavigationController,
     NavigationButton: NavigationButton,
