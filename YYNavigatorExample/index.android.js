@@ -8,32 +8,90 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
 } from 'react-native';
+
+import YYNavigator from 'react-native-yynavigator';
+let {
+    NavigationController,
+    NavigatorMixin,
+    NavigationButton
+} = YYNavigator;
 
 class YYNavigatorExample extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+          <NavigationController
+              initialRoute={{title: '首页', component:HomePage}}
+              />
       </View>
     );
   }
 }
 
+class HomePage extends Component {
+    render() {
+        return (
+            <ScrollView>
+                <View>
+                    <Text style={{margin: 20}} onPress={this.simpleJump.bind(this)}>
+                        Simple jump to next page, and change nav title in SecondPage.
+                    </Text>
+                </View>
+            </ScrollView>
+        );
+    }
+    simpleJump() {
+        this.props.goForward &&
+        this.props.goForward({title: 'Second Page', component: SecondPage});
+    }
+}
+
+class SecondPage extends Component {
+    componentWillMount() {
+        this.props.navigationController && this.props.navigationController.setTitle('Second');
+    }
+    render() {
+        return (
+            <ScrollView>
+                <View>
+                    <Text style={{margin: 20}} onPress={this.simpleJump.bind(this)}>
+                        Using NavigatorMixin.
+                    </Text>
+                </View>
+            </ScrollView>
+        );
+    }
+    simpleJump() {
+        this.navigatorPush('第三页', ThirdPage);
+    }
+}
+
+Object.assign(SecondPage.prototype, NavigatorMixin);
+
+class ThirdPage extends Component {
+    componentWillMount() {
+        this.props.navigationController && this.props.navigationController.setRightBarItem(NavigationButton);
+        this.props.setRightProps && this.props.setRightProps({barItemTitle: '返回', onPress: ()=>this.props.goBack && this.props.goBack()});
+    }
+    render() {
+        return (
+            <ScrollView>
+                <View>
+                    <Text style={{margin: 20}}>
+                        The last page.
+                    </Text>
+                </View>
+            </ScrollView>
+        );
+    }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
