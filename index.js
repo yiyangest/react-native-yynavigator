@@ -1,7 +1,10 @@
+import NavigationController from './Navigation/NavigationController';
+import NavigationButton from './Navigation/NavigationButton';
+import NavigatorMixin from './Navigator/NavigatorMixin';
 var YYNavigator = {
-    get NavigationController() {return require('./Navigation/NavigationController');},
-    get NavigationButton() {return require('./Navigation/NavigationButton');},
-    get NavigatorMixin() { return require('./Navigation/NavigatorMixin');}
+    NavigationController: NavigationController,
+    NavigationButton: NavigationButton,
+    NavigatorMixin: NavigatorMixin
 }
 
 module.exports = YYNavigator;
