@@ -1,6 +1,6 @@
 {
   "name": "react-native-yynavigator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "custom navigation bar for react-native",
   "main": "index.js",
   "scripts": {
