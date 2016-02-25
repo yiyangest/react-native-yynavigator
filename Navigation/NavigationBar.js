@@ -45,15 +45,6 @@ class NavigationBar extends React.Component {
       } else {
           navBarStyle = styles.navbarContainer;
       }
-      let previousNavbar = (
-          <BarContent route={this.state.previousRoute}
-                      leftBarItem={this.props.leftBarItem}
-                      rightBarItem={this.props.rightBarItem}
-                      titleBarItem={this.props.titleBarItem}
-                      titleStyle={this.props.titleStyle}
-                      willDisappear="true"
-          />
-      );
       let navbarContent = (
           <BarContent route={this.props.currentRoute}
                       rightBarItem={this.props.rightBarItem}
@@ -70,7 +61,6 @@ class NavigationBar extends React.Component {
 
       return (
           <View style={[navBarStyle, this.props.style]}>
-              {previousNavbar}
               {navbarContent}
           </View>
       );
@@ -85,23 +75,34 @@ class BarContent extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.transAnimation();
+    }
+
     componentWillReceiveProps(newProps) {
         if (newProps.route !== this.props.route) {
             this.state.opacity.setValue(this.props.willDisappear ? 1 : 0);
 
-            setTimeout(()=> {
-                    Animated.timing(
-                        this.state.opacity,
-                        {
-                            fromValue: this.props.willDisappear ? 1 : 0,
-                            toValue: this.props.willDisappear ? 0 : 1,
-                            duration: 300,
-                            easing: Easing.easeOutQuad
-                        }
-                    ).start();
-                }, 0
-            );
+            this.transAnimation();
+
+        } else if (newProps.route === this.props.route) {
+            this.state.opacity.setValue(1);
         }
+    }
+
+    transAnimation() {
+        setTimeout(()=> {
+                Animated.timing(
+                    this.state.opacity,
+                    {
+                        fromValue: this.props.willDisappear ? 1 : 0,
+                        toValue: this.props.willDisappear ? 0 : 1,
+                        duration: 300,
+                        easing: Easing.easeOutQuad
+                    }
+                ).start();
+            }, 0
+        );
     }
 
     goBack() {

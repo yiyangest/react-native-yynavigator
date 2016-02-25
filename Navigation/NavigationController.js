@@ -13,7 +13,8 @@ let {
     Navigator,
     StatusBarIOS,
     View,
-    Platform
+    Platform,
+    StatusBar
     } = React;
 
 export default class NavigationController extends React.Component {
@@ -24,10 +25,19 @@ export default class NavigationController extends React.Component {
                 title: null,
                 index: null
             },
-            dragStartX: null,
-            didSwitchView: null,
         };
         this.routeStack = [];
+    }
+    componentWillMount() {
+        this.state.route = this.props.initialRoute;
+        this.routeStack.push(this.props.initialRoute);
+    }
+    componentDidMount() {
+        this._navigator = this.refs["navigator"];
+        this.refs["navigator"].navigationContext.addListener('willfocus', (event)=>{
+            const route = event.data.route;
+            this.willFocus(route);
+        });
     }
     willFocus(route){
         if (route.index) {
@@ -140,25 +150,6 @@ export default class NavigationController extends React.Component {
             this.customAction(opts);
         }.bind(this);
 
-        var didStartDrag = function(event) {
-            var x = event.nativeEvent.pageX;
-            if (x < 28) {
-                this.setState({
-                    dragStartX: x,
-                    didSwitchView: false
-                });
-            }
-            return true;
-        }.bind(this);
-
-        var didMoveFinger = function(event) {
-            var draggedAway = (event.nativeEvent.pageX - this.state.dragStartX) > 30;
-            if (!this.state.didSwitchView && draggedAway) {
-                this.onBack(navigator);
-                this.setState({didSwitchView: true});
-            }
-        }.bind(this);
-
         var preventDefault = function(event) {
             return false;
         }
@@ -173,6 +164,22 @@ export default class NavigationController extends React.Component {
 
         var setTitleProps = function(props) {
             this.setTitleProps(props);
+        }.bind(this);
+
+        var setTitle = function(title) {
+            let route = {...this.state.route, title: title};
+            let currentRoute = navigator.getCurrentRoutes();
+            currentRoute[currentRoute.length - 1].title = title;
+            this.routeStack[this.routeStack.length - 1].title = title;
+            this.setState({route: route});
+        }.bind(this);
+
+        var setNavBarHidden = function(isHidden) {
+            let route = {...this.state.route, hideNavigationBar: isHidden};
+            let currentRoute = navigator.getCurrentRoutes();
+            currentRoute[currentRoute.length - 1].hideNavigationBar = isHidden;
+            this.routeStack[this.routeStack.length - 1].hideNavigationBar = isHidden;
+            this.setState({route: route});
         }.bind(this);
 
         var Content = route.component;
@@ -192,6 +199,8 @@ export default class NavigationController extends React.Component {
                          setRightProps={setRightProps}
                          setLeftProps={setLeftProps}
                          setTitleProps={setTitleProps}
+                         setTitle={setTitle}
+                         setNavBarHidden={setNavBarHidden}
                          goForward={goForward}
                          goBack={goBackwards}
                          popToTop={goToFirstRoute}
@@ -214,6 +223,16 @@ export default class NavigationController extends React.Component {
         } else if (Platform.OS === 'android') {
             // no android version yet
         }
+        let statusBar;
+        if (StatusBar && (!this.props.hideNavigationBar && !this.state.route.hideNavigationBar)) {
+            let color = '#5589B7';
+            if (this.props.navbarStyle && this.props.navbarStyle.backgroundColor) {
+                color = this.props.navbarStyle.backgroundColor;
+            }
+            statusBar = (
+                <StatusBar backgroundColor={color}  translucent={true} />
+            );
+        }
 
         if (!this.props.hideNavigationBar) {
             navigationBar = (
@@ -235,13 +254,15 @@ export default class NavigationController extends React.Component {
         }
 
         return (
-            <Navigator initialRoute={this.props.initialRoute}
-                       navigationBar={navigationBar}
-                       ref={(nav)=>this._navigator=nav}
-                       renderScene={this.renderScene.bind(this)}
-                       configureScene={this.configureScene}
-                       onWillFocus={this.willFocus.bind(this)}
-            />
+            <View style={{flex: 1}}>
+                {statusBar}
+                <Navigator initialRoute={this.props.initialRoute}
+                           navigationBar={navigationBar}
+                           ref="navigator"
+                           renderScene={this.renderScene.bind(this)}
+                           configureScene={this.configureScene}
+                />
+            </View>
         );
     }
 }
