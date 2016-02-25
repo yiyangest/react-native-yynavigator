@@ -18,13 +18,17 @@ let {
     NavigatorMixin,
     NavigationButton
 } = YYNavigator;
+// import NavigationController from './Navigation/NavigationController';
+// import NavigationButton from './Navigation/NavigationButton';
+// import NavigatorMixin from './Navigation/NavigatorMixin';
 
 class YYNavigatorExample extends Component {
   render() {
     return (
       <View style={styles.container}>
           <NavigationController
-              initialRoute={{title: '首页', component:HomePage}}
+              initialRoute={{title: 'Home', component:HomePage, hideNavigationBar: true}}
+              navbarStyle={{backgroundColor: 'green'}}
               />
       </View>
     );
@@ -32,6 +36,9 @@ class YYNavigatorExample extends Component {
 }
 
 class HomePage extends Component {
+    componentDidMount() {
+        // this.props.setNavBarHidden && this.props.setNavBarHidden(true);
+    }
     render() {
         return (
             <ScrollView>
@@ -65,7 +72,7 @@ class SecondPage extends Component {
         );
     }
     simpleJump() {
-        this.navigatorPush('第三页', ThirdPage);
+        this.navigatorPush('Third', ThirdPage);
     }
 }
 
@@ -74,7 +81,7 @@ Object.assign(SecondPage.prototype, NavigatorMixin);
 class ThirdPage extends Component {
     componentWillMount() {
         this.props.navigationController && this.props.navigationController.setRightBarItem(NavigationButton);
-        this.props.setRightProps && this.props.setRightProps({barItemTitle: '返回', onPress: ()=>this.props.goBack && this.props.goBack()});
+        this.props.setRightProps && this.props.setRightProps({barItemTitle: 'back', onPress: ()=>this.props.goBack && this.props.goBack()});
     }
     render() {
         return (
