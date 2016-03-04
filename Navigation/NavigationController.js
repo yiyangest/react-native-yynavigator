@@ -39,6 +39,13 @@ export default class NavigationController extends React.Component {
             this.willFocus(route);
         });
     }
+    componentWillReceiveProps(newProps) {
+        console.log("old props: ", this.props);
+        console.log("new props: ", newProps);
+        if (this.props.initialRoute != newProps.initialRoute) {
+            this.resetTo(newProps.initialRoute);
+        }
+    }
     willFocus(route){
         if (route.index) {
             if (route.index >= this.routeStack.length) {
@@ -126,6 +133,13 @@ export default class NavigationController extends React.Component {
         newRoute.index = this.state.route.index;
         this.routeStack[this.routeStack.length - 1] = newRoute;
         this.setState({route: newRoute});
+    }
+
+    resetTo(route) {
+        route.index = 0;
+        this.routeStack = [route];
+        this.refs["navigator"] && this.refs["navigator"].resetTo(route);
+        this.setState({route});
     }
 
     configureScene(route) {
