@@ -40,9 +40,9 @@ export default class NavigationController extends React.Component {
         });
     }
     componentWillReceiveProps(newProps) {
-        console.log("old props: ", this.props);
-        console.log("new props: ", newProps);
-        if (this.props.initialRoute != newProps.initialRoute) {
+        // console.log("old props: ", this.props);
+        // console.log("new props: ", newProps);
+        if (this.props.initialRoute.component != newProps.initialRoute.component) {
             this.resetTo(newProps.initialRoute);
         }
     }
