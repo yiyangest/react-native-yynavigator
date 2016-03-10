@@ -9,7 +9,9 @@ var {
   TouchableHighlight,
     TouchableOpacity,
     Animated,
-    Easing
+    Easing,
+    BackAndroid,
+    Platform,
 } = React;
 
 import NavigationButton, * as NavButton from './NavigationButton'
@@ -21,6 +23,23 @@ class NavigationBar extends React.Component {
             backButtonOpacity: 0,
             previousRoute: {}
         };
+    }
+    componentDidMount() {
+        if (Platform.OS == 'android') {
+            BackAndroid.addEventListener('hardwareBackPress', ()=>{
+                if (this.props.currentRoute.index && this.props.currentRoute.index > 0) {
+                    this.goBack();
+                    return true;
+                }
+
+                return false;
+            })
+        }
+    }
+    componentWillUnmount() {
+        if (Platform.OS == 'android') {
+            BackAndroid.removeEventListener('hardwareBackPress');
+        }
     }
     componentWillReceiveProps(newProps) {
         if (this.props && this.props.currentRoute.index !== newProps.currentRoute.index) {
