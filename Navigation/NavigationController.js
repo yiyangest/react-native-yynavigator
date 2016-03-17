@@ -160,6 +160,21 @@ export default class NavigationController extends React.Component {
             navigator.popToTop()
         };
 
+        var popToRoute = function(route) {
+            let routeStack = navigator.getCurrentRoutes();
+            if (routeStack.indexOf(route) == -1) {
+                for (let i = routeStack.length - 1; i>=0; i--) {
+                    let r = routeStack[i];
+                    if (r.component == route.component) {
+                        navigator.popToRoute(r);
+                        return;
+                    }
+                }
+            } else {
+                navigator.popToRoute(route);
+            }
+        }.bind(this);
+
         var customAction = function(opts) {
             this.customAction(opts);
         }.bind(this);
@@ -207,19 +222,20 @@ export default class NavigationController extends React.Component {
             <View style={[styles.container, this.props.itemWrapperStyle, extraStyling]}
             >
                 <Content name={route.title}
-                         index={route.index}
-                         navigator={navigator}
-                         navigationController={self}
-                         setRightProps={setRightProps}
-                         setLeftProps={setLeftProps}
-                         setTitleProps={setTitleProps}
-                         setTitle={setTitle}
-                         setNavBarHidden={setNavBarHidden}
-                         goForward={goForward}
-                         goBack={goBackwards}
-                         popToTop={goToFirstRoute}
-                         customAction={customAction}
-                        {...route.passProps}
+                    index={route.index}
+                    navigator={navigator}
+                    navigationController={self}
+                    setRightProps={setRightProps}
+                    setLeftProps={setLeftProps}
+                    setTitleProps={setTitleProps}
+                    setTitle={setTitle}
+                    setNavBarHidden={setNavBarHidden}
+                    goForward={goForward}
+                    goBack={goBackwards}
+                    popToTop={goToFirstRoute}
+                    popToRoute={popToRoute}
+                    customAction={customAction}
+                    {...route.passProps}
                 />
             </View>
         );
