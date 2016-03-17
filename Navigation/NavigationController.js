@@ -7,6 +7,7 @@
 import React from 'react-native'
 
 import NavigationBar from './NavigationBar';
+import NavStyles from './styles';
 
 let {
     StyleSheet,
@@ -336,10 +337,4 @@ NavigationController.propTypes={
 
 };
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f7f9',
-        marginTop: 64
-    }
-});
+var styles = Object.assign({}, NavStyles);
