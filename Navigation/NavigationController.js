@@ -255,15 +255,15 @@ export default class NavigationController extends React.Component {
             // no android version yet
         }
         let statusBar;
-        if (StatusBar && (!this.props.hideNavigationBar && !this.state.route.hideNavigationBar)) {
-            let color = '#5589B7';
-            if (this.props.navbarStyle && this.props.navbarStyle.backgroundColor) {
-                color = this.props.navbarStyle.backgroundColor;
-            }
-            statusBar = (
-                <StatusBar backgroundColor={color}  translucent={true} />
-            );
-        }
+        // if (StatusBar && (!this.props.hideNavigationBar && !this.state.route.hideNavigationBar)) {
+        //     let color = '#5589B7';
+        //     if (this.props.navbarStyle && this.props.navbarStyle.backgroundColor) {
+        //         color = this.props.navbarStyle.backgroundColor;
+        //     }
+        //     statusBar = (
+        //         <StatusBar backgroundColor={color}  translucent={true} />
+        //     );
+        // }
 
         if (!this.props.hideNavigationBar) {
             navigationBar = (
