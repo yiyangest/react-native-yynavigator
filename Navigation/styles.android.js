@@ -1,5 +1,5 @@
 'use strict';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, PixelRatio} from 'react-native';
 
 var styles = StyleSheet.create({
     container: {
@@ -14,7 +14,7 @@ var styles = StyleSheet.create({
         right: 0,
         height: 44,
         backgroundColor: '#5589B7',
-        bottomBorderWidth: 1 / PixelRatio.get(),
+        borderBottomWidth: 1 / PixelRatio.get(),
         borderColor: '#d2d2d2'
     },
     navbarContainerHidden: {

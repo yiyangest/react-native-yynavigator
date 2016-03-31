@@ -14,7 +14,7 @@ var styles = StyleSheet.create({
         right: 0,
         height: 64,
         backgroundColor: '#5589B7',
-        bottomBorderWidth: 1 / PixelRatio.get(),
+        borderBottomWidth: 1 / PixelRatio.get(),
         borderColor: '#d2d2d2'
     },
     navbarContainerHidden: {
