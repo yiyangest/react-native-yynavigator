@@ -13,7 +13,9 @@ var styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: 44,
-        backgroundColor: '#5589B7'
+        backgroundColor: '#5589B7',
+        bottomBorderWidth: 1 / PixelRatio.get(),
+        borderColor: '#d2d2d2'
     },
     navbarContainerHidden: {
         position: 'absolute',
@@ -32,7 +34,6 @@ var styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         // paddingTop: 13,
-        borderBottomWidth: 1,
     },
     navbarText: {
         color: 'white',

@@ -155,7 +155,7 @@ class BarContent extends React.Component {
             let LeftComponent = this.props.route.leftBarItem;
             leftBarItemContent = <LeftComponent goForward={this.goForward.bind(this)} customAction={this.customAction.bind(this)} {...this.props.leftProps}/>;
         } else if(this.props.route.index > 0) {
-            leftBarItemContent = <NavigationButton barItemType={NavButton.BUTTON_TEXT_ONLY} barItemTitle="<" onPress={()=>this.goBack()}/>;
+            leftBarItemContent = <NavigationButton barItemType={NavButton.BUTTON_IMAGE_ONLY} barItemImage={require('./icon_back.png')} onPress={()=>this.goBack()}/>;
         }
         leftBarItem = (
             <View style={[styles.barItem, styles.alignLeft]}>
