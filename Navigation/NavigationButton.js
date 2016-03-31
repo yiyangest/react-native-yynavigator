@@ -82,7 +82,8 @@ var styles = StyleSheet.create({
   },
   navBarBtnImg: {
     width: 24,
-    height: 24
+    height: 24,
+    margin: 10
   }
 });
 
