@@ -81,8 +81,8 @@ var styles = StyleSheet.create({
       color: 'black',
   },
   navBarBtnImg: {
-    width: 48,
-    height: 48
+    width: 24,
+    height: 24
   }
 });
 
