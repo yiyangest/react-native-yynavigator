@@ -15,5 +15,8 @@
     "react-native"
   ],
   "author": "yiyangest",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
 }
