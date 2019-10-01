@@ -4,19 +4,17 @@
 
 'use strict';
 
-import React from 'react-native'
-
-import NavigationBar from './NavigationBar';
-import NavStyles from './styles';
-
-let {
-    StyleSheet,
+import React from 'react'
+import PropTypes from 'prop-types';
+import {
     Navigator,
     StatusBarIOS,
     View,
     Platform,
-    StatusBar
-    } = React;
+} from 'react-native';
+
+import NavigationBar from './NavigationBar';
+import NavStyles from './styles';
 
 export default class NavigationController extends React.Component {
     constructor(props) {
@@ -306,16 +304,16 @@ NavigationController.propTypes={
     /**
      * 初始路由
      */
-    initalRoute: React.PropTypes.object, // {title, component, sceneConfig}
+    initalRoute: PropTypes.object, // {title, component, sceneConfig}
 
     /**
      * 导航栏样式
      */
-    navbarStyle: View.propTypes.style,
+    navbarStyle: PropTypes.object,
     /**
      * 内容页样式
      */
-    itemWrapperStyle: View.propTypes.style,
+    itemWrapperStyle: PropTypes.object,
     /**
      * 导航栏标题样式
      */
@@ -324,15 +322,15 @@ NavigationController.propTypes={
     /**
      * 右边按钮, component
      */
-    rightBarItem: React.PropTypes.element,
+    rightBarItem: PropTypes.node,
     /**
      * 左边按钮, component
      */
-    leftBarItem: React.PropTypes.element,
+    leftBarItem: PropTypes.node,
     /**
      * 中间标题, component
      */
-    titleBarItem: React.PropTypes.element,
+    titleBarItem: PropTypes.node,
 
 
 };

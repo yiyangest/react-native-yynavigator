@@ -1,15 +1,14 @@
 'use strict'
 
-import React from 'react-native'
+import React from 'react'
 
-var {
+import {
   View,
   Text,
   Image,
-  TouchableOpacity,
-    TouchableHighlight,
+  TouchableHighlight,
   StyleSheet
-} = React;
+} from 'react-natvie';
 
 export const BUTTON_TEXT_ONLY = 1;
 export const BUTTON_IMAGE_ONLY = 2;

@@ -1,18 +1,14 @@
 'use strict';
-import React from 'react-native'
+import React from 'react'
 
-var {
-  Navigator,
+import {
     View,
-  Text,
-    StyleSheet,
-  TouchableHighlight,
-    TouchableOpacity,
+    Text,
     Animated,
     Easing,
     BackAndroid,
     Platform,
-} = React;
+} from 'react-native';
 
 import NavigationButton, * as NavButton from './NavigationButton'
 import NavStyles from './styles';
